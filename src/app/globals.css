@@ -1,26 +1,142 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-primary: #0f0f0f;
+  --bg-secondary: #1a1a1a;
+  --bg-tertiary: #242424;
+  --accent-purple: #8b5cf6;
+  --accent-purple-dark: #7c3aed;
+  --accent-pink: #ec4899;
+  --text-primary: #f9fafb;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+  --border: #2d2d2d;
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --background: var(--bg-primary);
+  --foreground: var(--text-primary);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-tertiary: var(--bg-tertiary);
+  --color-accent-purple: var(--accent-purple);
+  --color-accent-purple-dark: var(--accent-purple-dark);
+  --color-accent-pink: var(--accent-pink);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-border: var(--border);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-bebas);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+}
+
+button,
+a,
+input,
+select {
+  outline-color: var(--accent-purple);
+}
+
+.font-heading {
+  font-family: var(--font-bebas), Impact, sans-serif;
+}
+
+.dot-grid {
+  background-image: radial-gradient(color-mix(in srgb, var(--accent-purple) 35%, transparent) 1px, transparent 1px);
+  background-size: 28px 28px;
+  animation: gridFloat 14s linear infinite;
+}
+
+.scrollbar-hide {
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.moka-progress {
+  appearance: none;
+  background: var(--bg-tertiary);
+}
+
+.moka-progress::-webkit-progress-bar {
+  background: var(--bg-tertiary);
+}
+
+.moka-progress::-webkit-progress-value {
+  background: var(--accent-purple);
+  transition: width 500ms ease-out;
+}
+
+.moka-progress::-moz-progress-bar {
+  background: var(--accent-purple);
+}
+
+.page-enter {
+  animation: fadeInUp 220ms ease both;
+}
+
+.scan-line {
+  animation: fadeInUp 300ms ease both;
+}
+
+.confetti::before,
+.confetti::after {
+  content: "";
+  position: absolute;
+  inset: -16px;
+  pointer-events: none;
+  background-image:
+    radial-gradient(var(--accent-purple) 2px, transparent 2px),
+    radial-gradient(var(--accent-pink) 2px, transparent 2px),
+    radial-gradient(var(--success) 2px, transparent 2px);
+  background-size: 36px 36px, 48px 48px, 58px 58px;
+  animation: fall 900ms ease-out both;
+}
+
+@keyframes gridFloat {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 56px 56px;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fall {
+  from {
+    opacity: 1;
+    transform: translateY(-12px);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(34px);
+  }
 }
